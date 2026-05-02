@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Replace existing meta tags in <head> -->
+        <meta name="description" content="I&R EMPORIO | Trendy & Affordable Fashion for Men, Women & Kids. Shop T-Shirts, Sportswear & More. Free Shipping Available. Wear With Attitude!" />
+        <meta name="keywords" content="fashion, trendy clothing, affordable t-shirts, sportswear, online shopping, Cebu fashion" />
+        <meta property="og:title" content="I&R EMPORIO | Premium Fashion Store" />
+        <meta property="og:image" content="https://yourdomain.com/images/logo-social-share.jpg" />
+        <meta property="og:url" content="https://yourdomain.com" />
+
+        <title>I&R EMPORIO</title>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Permanent+Marker&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+        <style>
+            /* Promo Banner */
+            #flashing-banner {
+                background: linear-gradient(90deg, rgba(12, 34, 17, 0.98), rgba(26, 66, 33, 0.96) 45%, rgba(218, 189, 113, 0.95));
+                color: #fffaf0;
+                padding: 14px 20px;
+                position: relative;
+                overflow: hidden;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+                box-shadow: 0 10px 24px rgba(19, 37, 23, 0.18);
+            }
+
+            #flashing-banner::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.12), transparent 28%), radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.08), transparent 24%), linear-gradient(90deg, rgba(255, 255, 255, 0.08), transparent 30%, transparent 70%, rgba(255, 255, 255, 0.05));
+                pointer-events: none;
+            }
+
+            .banner-inner {
+                position: relative;
+                z-index: 1;
+                max-width: 1180px;
+                margin: 0 auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 12px;
+                flex-wrap: wrap;
+                text-align: center;
+            }
+
+            .banner-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 14px;
+                border-radius: 999px;
+                background: rgba(255, 255, 255, 0.14);
+                border: 1px solid rgba(255, 255, 255, 0.18);
+                color: #fff7d6;
+                font-size: 12px;
+                font-weight: 800;
+                letter-spacing: 0.09em;
+                text-transform: uppercase;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+                backdrop-filter: blur(8px);
+            }
+
+            .banner-copy {
+                margin: 0;
+                font-size: 14px;
+                line-height: 1.5;
+                color: rgba(255, 250, 240, 0.98);
+                font-weight: 500;
+            }
+
+            .banner-copy strong {
+                color: #ffffff;
+                font-weight: 800;
+                text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+            }
+
+            .banner-separator {
+                color: rgba(255, 248, 220, 0.7);
+                font-weight: 700;
+            }
+        </style>
+    </head>
+</html>
