@@ -19,69 +19,246 @@
             href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Permanent+Marker&family=Poppins:wght@400;600;700;800;900&display=swap"
             rel="stylesheet" />
         <style>
-            /* Promo Banner */
-            #flashing-banner {
-                background: linear-gradient(90deg, rgba(25, 66, 33, 0.98), rgba(218, 189, 113, 0.94));
-                color: #fffaf0;
-                padding: 12px 20px;
-                position: relative;
-                overflow: hidden;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-                box-shadow: 0 6px 18px rgba(19, 37, 23, 0.12);
-            }
+            /* ══════════════════════════════════════════
+   PROMO TOP BANNER — Upgraded
+══════════════════════════════════════════ */
 
-            #flashing-banner::before {
-                content: "";
-                position: absolute;
-                inset: 0;
-                background:
-                    linear-gradient(90deg, rgba(255, 255, 255, 0.06), transparent 25%),
-                    radial-gradient(circle at center, rgba(255, 255, 255, 0.08), transparent 45%);
-                pointer-events: none;
-            }
+@keyframes shimmerSweep {
+    0%   { transform: translateX(-100%) skewX(-15deg); }
+    100% { transform: translateX(400%) skewX(-15deg); }
+}
 
-            .banner-inner {
-                position: relative;
-                z-index: 1;
-                max-width: 1180px;
-                margin: 0 auto;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 10px;
-                flex-wrap: wrap;
-                text-align: center;
-            }
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 80, 50, 0.55), 0 4px 14px rgba(0,0,0,0.25); }
+    50%       { box-shadow: 0 0 0 7px rgba(255, 80, 50, 0), 0 4px 14px rgba(0,0,0,0.25); }
+}
 
-            .banner-badge {
-                display: inline-flex;
-                align-items: center;
-                gap: 8px;
-                padding: 6px 12px;
-                border-radius: 999px;
-                background: rgba(255, 255, 255, 0.14);
-                border: 1px solid rgba(255, 255, 255, 0.18);
-                color: #fff3c1;
-                font-size: 12px;
-                font-weight: 700;
-                letter-spacing: 0.08em;
-                text-transform: uppercase;
-            }
+@keyframes marqueeScroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
 
-            .banner-copy {
-                margin: 0;
-                font-size: 13px;
-                line-height: 1.5;
-                color: rgba(255, 250, 240, 0.96);
-            }
+@keyframes dotBlink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.3; }
+}
 
-            .banner-copy strong {
-                color: #fffdf7;
-            }
+#flashing-banner {
+    background: linear-gradient(
+        100deg,
+        #0b2110 0%,
+        #1a4221 30%,
+        #183d1f 60%,
+        #2a1a00 85%,
+        #3d2b00 100%
+    );
+    color: #fffaf0;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(218, 189, 113, 0.35);
+    box-shadow: 0 4px 22px rgba(0, 0, 0, 0.38);
+    height: 46px;
+    display: flex;
+    align-items: center;
+}
 
-            .banner-separator {
-                color: rgba(255, 248, 220, 0.75);
-            }
+#flashing-banner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.13), transparent);
+    animation: shimmerSweep 3.8s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 3;
+}
+
+#flashing-banner::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, #dabd71 20%, #f5e49c 50%, #dabd71 80%, transparent 100%);
+    pointer-events: none;
+}
+
+.banner-live {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 0 16px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    z-index: 2;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    height: 100%;
+    background: rgba(0, 0, 0, 0.18);
+}
+
+.banner-live-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 8px rgba(74, 222, 128, 0.9);
+    animation: dotBlink 1.4s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+.banner-live-label {
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #f0e0a0;
+}
+
+.banner-marquee-wrap {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    mask-image: linear-gradient(90deg, transparent 0%, #000 5%, #000 95%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 5%, #000 95%, transparent 100%);
+}
+
+.banner-marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    white-space: nowrap;
+    animation: marqueeScroll 28s linear infinite;
+    will-change: transform;
+}
+
+.banner-marquee-track:hover {
+    animation-play-state: paused;
+}
+
+.bm-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 28px;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 250, 240, 0.95);
+    font-family: "Poppins", sans-serif;
+}
+
+.bm-item strong {
+    color: #fff;
+    font-weight: 800;
+}
+
+.bm-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+}
+
+.bm-pill-fire {
+    background: linear-gradient(135deg, #ff4e1a, #ff7a3a);
+    color: #fff;
+    animation: pulseGlow 1.8s ease-in-out infinite;
+    border: 1px solid rgba(255, 120, 60, 0.5);
+}
+
+.bm-pill-cod {
+    background: linear-gradient(135deg, #d4a017, #f5d060);
+    color: #1a2f0a;
+    border: 1px solid rgba(218, 175, 50, 0.5);
+    box-shadow: 0 3px 10px rgba(212, 160, 23, 0.3);
+}
+
+.bm-pill-ship {
+    background: linear-gradient(135deg, #1e7a4e, #2ab56f);
+    color: #fff;
+    border: 1px solid rgba(40, 180, 100, 0.4);
+    box-shadow: 0 3px 10px rgba(30, 122, 78, 0.3);
+}
+
+.bm-pill-new {
+    background: linear-gradient(135deg, #2563eb, #60a5fa);
+    color: #fff;
+    border: 1px solid rgba(96, 165, 250, 0.4);
+    box-shadow: 0 3px 10px rgba(37, 99, 235, 0.3);
+}
+
+.bm-pill-sale {
+    background: linear-gradient(135deg, #9333ea, #c084fc);
+    color: #fff;
+    border: 1px solid rgba(192, 132, 252, 0.4);
+    box-shadow: 0 3px 10px rgba(147, 51, 234, 0.3);
+}
+
+.bm-dot-divider {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(218, 189, 113, 0.7);
+    margin: 0 4px;
+    flex-shrink: 0;
+}
+
+.banner-cta-wrap {
+    padding: 0 14px;
+    flex-shrink: 0;
+    z-index: 2;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.18);
+}
+
+.banner-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #dabd71, #f5e49c);
+    color: #1a3a10;
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 12px rgba(184, 139, 44, 0.4);
+    white-space: nowrap;
+}
+
+.banner-cta-btn:hover {
+    transform: scale(1.06);
+    box-shadow: 0 6px 18px rgba(184, 139, 44, 0.55);
+}
+
+.banner-inner  { display: contents; }
+.banner-copy   { display: none; }
+.banner-badge  { display: none; }
+.banner-separator { display: none; }
 
             .preview-overlay {
                 position: fixed;
@@ -3297,20 +3474,104 @@
     </head>
     <body>
         <!-- Flashing Banner -->
-        <div id="flashing-banner" class="top-deal-strip">
-            <div class="banner-inner">
-                <span class="banner-badge">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M12 3l1.8 3.8 4.2.6-3 3  .7 4.1L12 12.6 8.3 14.5 9 10.4l-3-3 4.2-.6L12 3z"></path>
-                    </svg>
-                    HOT DEAL
-                </span>
-                <p class="banner-copy"><strong>FREE SHIPPING</strong> on orders &#8369;1,500+</p>
-                <span class="banner-separator"></span>
-                <p class="banner-copy"><strong>CASH ON DELIVERY</strong> Available</p>
-                <span class="banner-separator"></span>
-                <p class="banner-copy">Trendy Fits. Affordable Prices. Wear with Attitude.</p>
+        <div id="flashing-banner" role="marquee" aria-label="Promotions">
+
+            <!-- Left: live indicator -->
+            <div class="banner-live">
+                <span class="banner-live-dot"></span>
+                <span class="banner-live-label">I&amp;R Emporio</span>
             </div>
+
+            <!-- Centre: scrolling ticker -->
+            <div class="banner-marquee-wrap">
+                <div class="banner-marquee-track">
+
+                    <!-- SET 1 -->
+                    <div class="bm-item">
+                        <span class="bm-pill bm-pill-fire">🔥 Hot Deals</span>
+                        Up to <strong>50% OFF</strong> on selected items this week!
+                    </div>
+                    <div class="bm-item">
+                        <span class="bm-pill bm-pill-cod">💵 COD</span>
+                        <strong>Cash on Delivery</strong> available nationwide
+                        <span class="bm-dot-divider"></span>
+                        No card needed!
+                    </div>
+                    <div class="bm-item">
+                        <span class="bm-pill bm-pill-ship">🚚 Free Shipping</span>
+                        On orders <strong>&#8369;500 &amp; above</strong>
+                    </div>
+                    <div class="bm-item">
+                        <span class="bm-pill bm-pill-new">✨ New Arrivals</span>
+                        Fresh drops every <strong>Friday</strong> — don't miss out
+                    </div>
+                    <div class="bm-item">
+                        <span class="bm-pill bm-pill-sale">🏷️ Sale</span>
+                        T-shirts from <strong>&#8369;199</strong>
+                        <span class="bm-dot-divider"></span>
+                        Sportswear from <strong>&#8369;299</strong>
+                    </div>
+                    <div class="bm-item">
+                        <span class="bm-pill bm-pill-fire">🔥 Hot Deals</span>
+                        Buy 2 Get <strong>1 FREE</strong> on all graphic tees
+                    </div>
+                    <div class="bm-item">
+                        <span class="bm-pill bm-pill-cod">💵 COD</span>
+                        <strong>Pay when it arrives</strong> — 100% safe &amp; easy
+                    </div>
+                    <div class="bm-item">
+                        🌟 <strong>Wear With Attitude</strong>
+                        <span class="bm-dot-divider"></span>
+                        Cebu's go-to fashion store
+                    </div>
+
+                    <!-- SET 2 (clone for seamless loop) -->
+                    <div class="bm-item">
+                        <span class="bm-pill bm-pill-fire">🔥 Hot Deals</span>
+                        Up to <strong>50% OFF</strong> on selected items this week!
+                    </div>
+                    <div class="bm-item">
+                        <span class="bm-pill bm-pill-cod">💵 COD</span>
+                        <strong>Cash on Delivery</strong> available nationwide
+                        <span class="bm-dot-divider"></span>
+                        No card needed!
+                    </div>
+                    <div class="bm-item">
+                        <span class="bm-pill bm-pill-ship">🚚 Free Shipping</span>
+                        On orders <strong>&#8369;500 &amp; above</strong>
+                    </div>
+                    <div class="bm-item">
+                        <span class="bm-pill bm-pill-new">✨ New Arrivals</span>
+                        Fresh drops every <strong>Friday</strong> — don't miss out
+                    </div>
+                    <div class="bm-item">
+                        <span class="bm-pill bm-pill-sale">🏷️ Sale</span>
+                        T-shirts from <strong>&#8369;199</strong>
+                        <span class="bm-dot-divider"></span>
+                        Sportswear from <strong>&#8369;299</strong>
+                    </div>
+                    <div class="bm-item">
+                        <span class="bm-pill bm-pill-fire">🔥 Hot Deals</span>
+                        Buy 2 Get <strong>1 FREE</strong> on all graphic tees
+                    </div>
+                    <div class="bm-item">
+                        <span class="bm-pill bm-pill-cod">💵 COD</span>
+                        <strong>Pay when it arrives</strong> — 100% safe &amp; easy
+                    </div>
+                    <div class="bm-item">
+                        🌟 <strong>Wear With Attitude</strong>
+                        <span class="bm-dot-divider"></span>
+                        Cebu's go-to fashion store
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Right: CTA button -->
+            <div class="banner-cta-wrap">
+                <a href="#products" class="banner-cta-btn">Shop Now →</a>
+            </div>
+
         </div>
 
         <!-- Header -->
